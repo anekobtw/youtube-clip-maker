@@ -3,8 +3,8 @@ This is a Python script that allows you to download a YouTube video, cut a segme
 
 ## Installation
 Clone this repository to your local machine or download the ZIP file and extract it.\
-Install the required packages using pip install -r requirements.txt.\
-Run the script using python vidcut.py.
+Install the required packages using `pip install -r requirements.txt.`\
+Run the script using `python vidcut.py`.
 
 ## Usage
 Enter the link to the YouTube video you want to download when prompted.\
