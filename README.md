@@ -6,6 +6,8 @@ Clone this repository to your local machine or download the ZIP file and extract
 Install the required packages using `pip install -r requirements.txt`.\
 Run the script using `python vidcut.py`.
 
+Notice that python must be installed on your computer.
+
 ## Usage
 Enter the link to the YouTube video you want to download when prompted.\
 Enter the start and end times for the segment you want to cut from the video when prompted.\
