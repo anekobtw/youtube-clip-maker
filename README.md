@@ -1,4 +1,4 @@
-# YouTube Video Cutter v1.0
+# YouTube Video Cutter v1.1
 This is a Python script that allows you to download a YouTube video, cut a segment from it, and then combine the segment with the audio to create a new video file.
 
 ## Installation
