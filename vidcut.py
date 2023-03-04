@@ -1,35 +1,41 @@
-import pytube
-import requests
-from colorama import Fore, init
+import threading
+from pytube import YouTube 
 from moviepy.editor import AudioFileClip, VideoFileClip
+print("© 2023, Aneko\n")
 
-init(autoreset=True)
-print("© 2023 anekobtw")
-CURRENT_VERSION = "v1.2"
+def download_video(link: str):
+    def download_audio():
+        YouTube(link).streams.get_by_itag(18).download(output_path=".", filename="audio.mp3")
+        print("Audio has been successfuly downloaded!")
 
-def check_for_updates(current_version):
-    api_url = 'https://api.github.com/repos/anekobtw/youtube-clip-maker/releases/latest'
-    latest_version = requests.get(api_url).json()['tag_name']
-    if latest_version != current_version:
-        print(f"{Fore.RED}\nYou are using an old version of the app. A new version is already available here:\
-                            \nhttps://github.com/anekobtw/youtube-clip-maker\
-                            \nLatest Version: {latest_version}\n")
+    def download_video():
+        YouTube(link).streams.filter(res="1080p").first().download(output_path=".", filename="video.mp4")
+        print("Video has been successfuly downloaded!")
 
-def download_video(link):
-    youtube = pytube.YouTube(link)
-    youtube.streams.filter(only_audio=True).first().download(filename="audio.mp3")
-    youtube.streams.filter(res="1080p").first().download(filename="video_without_audio.mp4")
+    audio_thread = threading.Thread(target=download_audio)
+    video_thread = threading.Thread(target=download_video)
 
-def cut_video(start_time, end_time):
-    video_cutted = VideoFileClip("video_without_audio.mp4").subclip(start_time, end_time)
+    audio_thread.start()
+    video_thread.start()
+
+    audio_thread.join()
+    video_thread.join()
+
+def cut_video(start_time: float, end_time: float):
+    video_cutted = VideoFileClip("video.mp4").subclip(start_time, end_time)
     audio_cutted = AudioFileClip("audio.mp3").subclip(start_time, end_time)
-    video_cutted.set_audio(audio_cutted).write_videofile("cutted_video.mp4", logger=None)
+
+    final_video = video_cutted.set_audio(audio_cutted)
+    final_video.write_videofile("cutted_video.mp4", fps=60)
 
 if __name__ == '__main__':
-    check_for_updates(CURRENT_VERSION)
-    if input("Download video/stream? (yes/no) ").lower() in ["yes", "y"]:
-        download_video(input("Enter video link: "))
-    cut_video(float(input("Enter clip start time: ")), float(input("Enter clip end time: ")))
+    if input("Download video (Y/n) ? ").lower() in ["yes", "y"]:
+        link = input("Enter video link: ")
+        download_video(link)
+
+    start_time = float(input("Enter start time (in seconds): "))
+    end_time = float(input("Enter end time (in seconds): "))
+    cut_video(start_time, end_time)
 
     print("Done!")
     input("Press Enter to exit ")
