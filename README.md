@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # YouTube Clip Maker v1.3
+=======
+# YouTube Clip Maker v1.2
+>>>>>>> f14ba7bfe3b7d5cbe17ae3023b471341bcfa6241
 This is a Python script that allows you to download a YouTube video, cut a segment from it, and then combine the segment with the audio to create a new video file.
 
 ## Installation and Usage
