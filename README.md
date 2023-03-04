@@ -12,7 +12,7 @@ Notice that python must be installed on your computer.
 2. Enter the start and end times for the section of the video you want to cut (in seconds).
 3. The script will then download the video, extract its audio, cut the section of the video and merge the cutted video with the extracted audio to create a new video file called cutted_video.mp4.
 
-Note: You can skip the video download step if you already have the video file downloaded on your computer. Just make sure the video file is in the same directory as the script and rename it to `video.mp4`.
+**Note:** You can skip the video download step if you already have the video file downloaded on your computer. Just make sure the video file is in the same directory as the script and rename it to `video.mp4`.
 
 ## License
 This project is licensed under the MIT license.
