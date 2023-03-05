@@ -4,7 +4,7 @@ from moviepy.editor import AudioFileClip, VideoFileClip
 print("© 2023, Aneko\n")
 
 def download_video(link: str):
-    print("Downloading video...")
+    print("Downloading...")
 
     def download_audio():
         YouTube(link).streams.get_by_itag(18).download(output_path=".", filename="audio.mp3")
@@ -26,15 +26,15 @@ def download_video(link: str):
     print("Download complete!")
 
 def cut_video(start_time: float, end_time: float):
-    print("Cutting video...")
+    print("Cutting...")
 
-    video_cutted = VideoFileClip("video.mp4").subclip(start_time, end_time)
-    audio_cutted = AudioFileClip("audio.mp3").subclip(start_time, end_time)
+    video_cut = VideoFileClip("video.mp4").subclip(start_time, end_time)
+    audio_cut = AudioFileClip("audio.mp3").subclip(start_time, end_time)
 
-    final_video = video_cutted.set_audio(audio_cutted)
-    final_video.write_videofile("cutted_video.mp4", fps=60, logger=None)
+    final_video = video_cut.set_audio(audio_cut)
+    final_video.write_videofile("cut_video.mp4", fps=60, logger=None)
 
-    print("Video has been cut and saved as cutted_video.mp4")
+    print("Video has been cut and saved as cut_video.mp4")
 
 if __name__ == '__main__':
     print("Note: Make sure you have pytube and moviepy installed.")
@@ -43,7 +43,7 @@ if __name__ == '__main__':
         link = input("Enter video link: ")
         download_video(link)
 
-    start_time = float(input("Enter start time (in seconds): "))
+    start_time = float(input("Enter Dtime (in seconds): "))
     end_time = float(input("Enter end time (in seconds): "))
     cut_video(start_time, end_time)
 
